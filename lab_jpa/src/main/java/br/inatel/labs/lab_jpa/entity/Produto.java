@@ -1,13 +1,43 @@
 package br.inatel.labs.lab_jpa.entity;
 
 import java.util.List;
+import java.util.Objects;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+
+
+@Entity
+@Data
 public class Produto {
 
     // Atributos da classe de produto
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min=2,max=100)
+    @ManyToMany(mappedBy = "listaProduto")
     private List <Fornecedor> listaFornecedor;
+
     private String descricao;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 
 }
