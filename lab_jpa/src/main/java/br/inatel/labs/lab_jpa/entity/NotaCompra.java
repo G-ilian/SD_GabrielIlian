@@ -29,6 +29,17 @@ public class NotaCompra {
     @Past
     private LocalDate dataEmissao;
 
+    // Construtores
+
+    public NotaCompra() {
+    }
+
+    public NotaCompra(@NotNull @Past Fornecedor fornecedor, LocalDate dataEmissao) {
+        super();
+        this.fornecedor = fornecedor;
+        this.dataEmissao = dataEmissao;
+    }
+
     // Métodos
     public BigDecimal getCalculoTotalNotal(){
         BigDecimal totalDaNota = listaCompraItem.stream().map(i->i.getCalculoTotalItem()).reduce(BigDecimal.ZERO,BigDecimal::add);

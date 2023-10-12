@@ -28,6 +28,18 @@ public class NotaCompraItem {
     @Positive
     private Integer quantidade;
 
+    // Construtores
+
+    public NotaCompraItem() {
+    }
+
+    public NotaCompraItem(NotaCompra notaCompra, Produto produto,@NotNull @Positive BigDecimal valorCompraProduto,@NotNull @Positive Integer quantidade) {
+        this.notaCompra = notaCompra;
+        this.produto = produto;
+        this.valorCompraProduto = valorCompraProduto;
+        this.quantidade = quantidade;
+    }
+
     // Cálculo do total do item
     public BigDecimal getCalculoTotalItem(){
         return valorCompraProduto.multiply(BigDecimal.valueOf(quantidade));

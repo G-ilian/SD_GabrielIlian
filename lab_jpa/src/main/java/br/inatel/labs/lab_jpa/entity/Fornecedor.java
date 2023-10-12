@@ -17,12 +17,21 @@ public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToMany
     private List<Produto> listaProduto;
 
     @NotNull
     @Size(min=2,max=200)
     private String razaoSocial;
+    public Fornecedor() {
+
+    }
+
+    public Fornecedor(String razaoSocial) {
+        super();
+        this.razaoSocial = razaoSocial;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package br.inatel.labs.lab_jpa.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,13 +20,24 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min=2,max=100)
+
+
     @ManyToMany(mappedBy = "listaProduto")
     private List <Fornecedor> listaFornecedor;
 
+    @NotNull
+    @Size(min=2,max=100)
     private String descricao;
 
+    // Construtores
+    public Produto() {
+
+    }
+
+    public Produto(String descricao) {
+        super();
+        this.descricao = descricao;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
