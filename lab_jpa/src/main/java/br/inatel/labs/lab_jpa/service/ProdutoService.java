@@ -1,38 +1,35 @@
 package br.inatel.labs.lab_jpa.service;
 
 import br.inatel.labs.lab_jpa.entity.Produto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import br.inatel.labs.lab_jpa.repository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class ProdutoService {
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     // Métodos
     public Produto salvar(Produto p) {
-        p = em.merge( p );
-        return p;
+        return produtoRepository.save(p);
     }
 
-    public Produto buscarPeloId(Long id) {
-        Produto produto = em.find(Produto.class, id);
-        return produto;
+    public Optional<Produto> buscarPeloId(Long id) {
+        return produtoRepository.findById(id);
     }
 
     public List <Produto> listar() {
-        return em.createQuery("select p from Produto p", Produto.class)
-                .getResultList();
+        return produtoRepository.findAll();
     }
 
     public void remover(Produto p) {
-        p = em.merge( p );
-        em.remove( p );
+        produtoRepository.delete(p);
     }
 
 
