@@ -3,6 +3,7 @@ import br.inatel.labs.lab_jpa.entity.NotaCompra;
 import br.inatel.labs.lab_jpa.entity.NotaCompraItem;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,12 @@ public class NotaCompraService {
 
     public NotaCompraItem buscarNotaCompraItemPeloId(Long id) {
         return em.find(NotaCompraItem.class, id);
+    }
+
+    public NotaCompra buscarNotaCompraPeloIdComListaItem(Long id) {
+        NotaCompra nota = em.find(NotaCompra.class,id);
+        nota.getListaCompraItem().size();
+        return nota;
     }
 
     public List<NotaCompraItem> listarNotaCompraItem(){
