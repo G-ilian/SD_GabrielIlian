@@ -13,6 +13,9 @@ public class Produto {
         this.descricao = descricao;
         this.preco = preco;
     }
+    public Produto(){
+
+    }
 
     // Getters and setters
 
